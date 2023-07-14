@@ -12,7 +12,6 @@ import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import marker from "leaflet/dist/images/marker-icon.png";
 import axios from "axios";
-import Filters from "./Filters";
 import Form from "./Form";
 import L from "leaflet";
 import AddMarker from "./CreateLocation";
@@ -27,8 +26,7 @@ export type Estate = {
   lng: number;
   bedrooms: string;
   bathrooms: string;
-  parking: boolean;
-  // tipar con lo que trae el objeto
+  parking: boolean;  
 };
 
 const position = { lat: -33.426666667, lng: -70.583333333333 };
@@ -51,7 +49,7 @@ const AllMarker = () => {
 
   async function getStates() {
     const res = await axios
-      .get(`http://localhost:4001/items/`)
+      .get("https://state-server.onrender.com/items/")
       .then((res) => setRealStates(res.data));
   }
 
@@ -65,7 +63,7 @@ const AllMarker = () => {
 
   const handleDeleteById = (event: any) => {
     try {
-      axios.delete("http://localhost:4001/items/" + event.currentTarget.id);
+      axios.delete("https://state-server.onrender.com/items/" + event.currentTarget.id);
       window.location.reload();
     } catch (error) {
       console.log(error);
