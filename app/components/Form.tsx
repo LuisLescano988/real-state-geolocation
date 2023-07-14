@@ -33,7 +33,7 @@ const Form = ({latLng}: FormProps) => {
     
     const handleSubmit = () => {
       try {
-          axios.post('http://localhost:4001/items', formValues)
+          axios.post('https://state-server.onrender.com/items', formValues)
      } catch (error) {
          console.log(error)
      }
