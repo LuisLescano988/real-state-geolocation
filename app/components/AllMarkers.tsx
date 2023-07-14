@@ -49,7 +49,7 @@ const AllMarker = () => {
 
   async function getStates() {
     const res = await axios
-      .get("https://state-server.onrender.com/items/")
+      .get("https://state-server.onrender.com/items")
       .then((res) => setRealStates(res.data));
   }
 
