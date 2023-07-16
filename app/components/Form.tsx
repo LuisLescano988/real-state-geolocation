@@ -4,7 +4,7 @@ import { TileLayer, MapContainer, Marker, Popup } from "react-leaflet";
 import { Icon, latLng } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import marker from "leaflet/dist/images/marker-icon.png";
-import {ChangeEvent} from "react";
+import { ChangeEvent } from "react";
 import axios from "axios";
 
 // import {getStates} from "./states"
@@ -19,27 +19,33 @@ type FormProps = {
   latLng: any;
 }
 
-const Form = ({latLng}: FormProps) => {
+const Form = ({ latLng }: FormProps) => {
   const [formValues, setFormValues] = useState({
-      name: "",
-      initialInv: "",
-      typeInv:"Pronta entrega",
-      lat:"",
-      lng:"",
-      bedrooms:"",
-      bathrooms:"",
-      parking: "false"
-    });
-    
-    const handleSubmit = () => {
-      try {
-          axios.post('https://state-server.onrender.com/items', formValues, {method:"post"})
-     } catch (error) {
-         console.log(error)
-     }
+    name: "",
+    initialInv: "",
+    typeInv: "Pronta entrega",
+    lat: "",
+    lng: "",
+    bedrooms: "",
+    bathrooms: "",
+    parking: "false"
+  });
+
+  const handleSubmit = () => {
+    try {
+      //       axios.post('https://state-server.onrender.com/items/', formValues, {method:"post"})
+      axios({
+        method: 'post',
+        url: 'https://state-server.onrender.com/items/',
+        data: formValues
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>|ChangeEvent<HTMLSelectElement>) => {
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
     setFormValues(
       {
         ...formValues,
@@ -49,7 +55,7 @@ const Form = ({latLng}: FormProps) => {
   }
 
   useEffect(() => {
-    if(latLng) {
+    if (latLng) {
       setFormValues({
         ...formValues,
         lat: latLng.lat,
@@ -59,9 +65,9 @@ const Form = ({latLng}: FormProps) => {
   }, [latLng])
 
 
-  
+
   return (
-    <div className=" flex flex-row justify-start align-middle mt-9">           
+    <div className=" flex flex-row justify-start align-middle mt-9">
       <form
         className="flex flex-col justify-center w-9/12"
         onSubmit={handleSubmit}
