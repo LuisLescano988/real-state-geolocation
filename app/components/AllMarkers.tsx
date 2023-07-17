@@ -66,7 +66,7 @@ const AllMarker = () => {
     try {
       axios.delete('https://state-server.onrender.com/items/' + event.currentTarget.id)
       .then(()=>alert("Proyecto eliminado"))
-      .then(()=>window.location.reload())      
+      // .then(()=>window.location.reload())      
     } catch (error) {
       console.log(error);
     }
