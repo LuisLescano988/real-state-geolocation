@@ -71,6 +71,7 @@ const Form = ({ latLng }: FormProps) => {
       <form
         className="flex flex-col justify-center w-9/12"
         onSubmit={handleSubmit}
+        method="post"
       >
         <h3 className="ml-4 font-bold border-2 border-cyan-400 max-w-fit p-2">
           Completar para crear un proyecto
