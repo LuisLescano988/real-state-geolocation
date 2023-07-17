@@ -62,9 +62,11 @@ const AllMarker = () => {
   }
 
   const handleDeleteById = (event: any) => {
+    event.preventDefault();
     try {
-      axios.delete("https://state-server.onrender.com/items/" + event.currentTarget.id);
-      window.location.reload();
+      axios.delete('https://state-server.onrender.com/items/' + event.currentTarget.id)
+      .then(()=>alert("Proyecto eliminado"))
+      .then(()=>window.location.reload())      
     } catch (error) {
       console.log(error);
     }
@@ -110,7 +112,7 @@ const AllMarker = () => {
               <button
                 className=" mt-1 p-1 rounded-md bg-cyan-800 text-white border-none"
                 id={eachState._id}
-                onClick={handleDeleteById}
+                onClick={(event)=>handleDeleteById(event)}
               >
                 Eliminar
               </button>

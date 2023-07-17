@@ -31,18 +31,16 @@ const Form = ({ latLng }: FormProps) => {
     parking: "false"
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e:any) => {
+    e.preventDefault()
     try {
-            axios.post('https://state-server.onrender.com/items/', formValues, {method:"post"})
-      // axios({
-      //   method: 'post',
-      //   url: 'https://state-server.onrender.com/items/',
-      //   data: formValues
-      // })
-    } catch (error) {
-      console.log(error)
-    }
-  }
+      axios.post('https://state-server.onrender.com/items', formValues)
+      .then(()=> alert("Proyecto creado"))
+      .then(()=>window.location.reload())        
+   } catch (error) {
+       console.log(error)
+   }
+}
 
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
@@ -70,7 +68,7 @@ const Form = ({ latLng }: FormProps) => {
     <div className=" flex flex-row justify-start align-middle mt-9">
       <form
         className="flex flex-col justify-center w-9/12"
-        onSubmit={handleSubmit}
+        onSubmit={(e)=>handleSubmit(e)}
         method="post"
       >
         <h3 className="ml-4 font-bold border-2 border-cyan-400 max-w-fit p-2">
